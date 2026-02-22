@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum Calculator — Year 11 Physics Interactive Tool</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        function LearnMomentum() {
+            return (
+                <div className="space-y-6">
+                    {/* What is Momentum */}
+                    <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 border-2 border-indigo-200">
+                        <h3 className="text-2xl font-bold text-indigo-900 mb-3">What is Momentum?</h3>
+                        <p className="text-gray-700 text-lg mb-4">
+                            Momentum is a measure of how difficult it is to stop a moving object. Think of it as the "quantity of motion" 
+                            that an object has. The more momentum something has, the harder it is to bring to a stop.
+                        </p>
+                        <div className="bg-white rounded-lg p-4 border-l-4 border-indigo-600">
+                            <p className="text-gray-700">
+                                <span className="font-bold">Everyday Example:</span> A heavy lorry moving at 30 mph has much more momentum 
+                                than a bicycle moving at the same speed. That's why the lorry would be much harder to stop!
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* The Momentum Equation */}
+                    <div className="bg-white rounded-lg p-6 border-2 border-gray-200">
+                        <h3 className="text-2xl font-bold text-gray-800 mb-4">The Momentum Equation</h3>
+                        <div className="bg-indigo-900 text-white rounded-lg p-6 mb-4">
+                            <p className="text-4xl font-mono text-center mb-3">p = m × v</p>
+                            <p className="text-center text-lg">momentum = mass × velocity</p>
+                        </div>
+                        
+                        <div className="grid md:grid-cols-3 gap-4 mb-4">
+                            <div className="bg-indigo-50 rounded-lg p-4">
+                                <p className="font-bold text-indigo-900 mb-2">p (momentum)</p>
+                                <p className="text-gray-700 text-sm">Measured in kg m/s</p>
+                                <p className="text-gray-700 text-sm mt-2">Also called kilogram metres per second</p>
+                            </div>
+                            <div className="bg-purple-50 rounded-lg p-4">
+                                <p className="font-bold text-purple-900 mb-2">m (mass)</p>
+                                <p className="text-gray-700 text-sm">Measured in kg</p>
+                                <p className="text-gray-700 text-sm mt-2">The amount of matter in the object</p>
+                            </div>
+                            <div className="bg-pink-50 rounded-lg p-4">
+                                <p className="font-bold text-pink-900 mb-2">v (velocity)</p>
+                                <p className="text-gray-700 text-sm">Measured in m/s</p>
+                                <p className="text-gray-700 text-sm mt-2">Speed in a particular direction</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                            <p className="font-semibold text-gray-800 mb-2">Quick Calculation Example:</p>
+                            <p className="text-gray-700">A car with mass 1,200 kg travelling at 15 m/s:</p>
+                            <p className="text-gray-700 mt-2 font-mono">p = 1,200 × 15 = 18,000 kg m/s</p>
+                        </div>
+                    </div>
+
+                    {/* Momentum is a Vector */}
+                    <div className="bg-white rounded-lg p-6 border-2 border-gray-200">
+                        <h3 className="text-2xl font-bold text-gray-800 mb-4">Momentum is a Vector Quantity</h3>
+                        <p className="text-gray-700 mb-4">
+                            Unlike mass or speed, momentum has both <span className="font-bold">magnitude (size)</span> and 
+                            <span className="font-bold"> direction</span>. This makes it a vector quantity.
+                        </p>
+                        
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <div className="bg-green-50 rounded-lg p-4 border-2 border-green-300">
+                                <p className="font-bold text-green-900 mb-2">✓ Moving Right (Positive)</p>
+                                <p className="text-gray-700 text-sm">A car moving east at 20 m/s</p>
+                                <p className="text-gray-700 text-sm">Momentum = +40,000 kg m/s</p>
+                            </div>
+                            <div className="bg-red-50 rounded-lg p-4 border-2 border-red-300">
+                                <p className="font-bold text-red-900 mb-2">← Moving Left (Negative)</p>
+                                <p className="text-gray-700 text-sm">Same car moving west at 20 m/s</p>
+                                <p className="text-gray-700 text-sm">Momentum = -40,000 kg m/s</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mt-4">
+                            <p className="text-gray-700">
+                                <span className="font-semibold">Why does direction matter?</span> When calculating collisions or 
+                                explosions, objects moving in opposite directions have opposite momentum values. This is crucial 
+                                for conservation of momentum calculations!
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Conservation of Momentum */}
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border-2 border-green-200">
+                        <h3 className="text-2xl font-bold text-green-900 mb-4">Conservation of Momentum</h3>
+                        <p className="text-gray-700 text-lg mb-4">
+                            This is one of the most important principles in physics:
+                        </p>
+                        <div className="bg-green-900 text-white rounded-lg p-6 mb-4">
+                            <p className="text-xl text-center font-semibold">
+                                In a closed system, the total momentum before an event equals the total momentum after the event
+                            </p>
+                            <p className="text-center mt-3 text-lg font-mono">
+                                Total momentum BEFORE = Total momentum AFTER
+                            </p>
+                        </div>
+
+                        <div className="space-y-3">
+                            <div className="bg-white rounded-lg p-4">
+                                <p className="font-bold text-gray-800 mb-2">What is a "closed system"?</p>
+                                <p className="text-gray-700">A system where no external forces act on the objects. In real life, 
+                                this means ignoring friction and air resistance for our calculations.</p>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-4">
+                                <p className="font-bold text-gray-800 mb-2">When does this apply?</p>
+                                <ul className="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Collisions (cars crashing, balls hitting each other)</li>
+                                    <li>Explosions (rockets launching, guns firing)</li>
+                                    <li>Objects pushing apart (ice skaters pushing off each other)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Types of Collisions */}
+                    <div className="bg-white rounded-lg p-6 border-2 border-gray-200">
+                        <h3 className="text-2xl font-bold text-gray-800 mb-4">Understanding Collisions</h3>
+                        
+                        <div className="space-y-4">
+                            <div className="bg-indigo-50 rounded-lg p-5 border-l-4 border-indigo-600">
+                                <h4 className="font-bold text-indigo-900 mb-2 text-lg">Perfectly Inelastic Collision</h4>
+                                <p className="text-gray-700 mb-3">
+                                    The objects stick together after collision and move as one combined object.
+                                </p>
+                                <div className="bg-white rounded p-3">
+                                    <p className="font-semibold text-gray-800 mb-1">Example:</p>
+                                    <p className="text-gray-700 text-sm">A moving truck hits a stationary car. They crumple together 
+                                    and move off as one combined mass.</p>
+                                    <p className="text-gray-700 text-sm mt-2 font-mono">
+                                        m₁v₁ + m₂v₂ = (m₁ + m₂) × v_final
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-purple-50 rounded-lg p-5 border-l-4 border-purple-600">
+                                <h4 className="font-bold text-purple-900 mb-2 text-lg">Elastic Collision</h4>
+                                <p className="text-gray-700 mb-3">
+                                    The objects bounce off each other and move separately after collision.
+                                </p>
+                                <div className="bg-white rounded p-3">
+                                    <p className="font-semibold text-gray-800 mb-1">Example:</p>
+                                    <p className="text-gray-700 text-sm">Pool balls hitting each other - they bounce apart but 
+                                    total momentum is still conserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Explosions */}
+                    <div className="bg-white rounded-lg p-6 border-2 border-gray-200">
+                        <h3 className="text-2xl font-bold text-gray-800 mb-4">Understanding Explosions</h3>
+                        <p className="text-gray-700 mb-4">
+                            An explosion is when objects that start together push apart. The key principle is that they gain 
+                            <span className="font-bold"> equal and opposite momentum</span>.
+                        </p>
+
+                        <div className="bg-orange-50 rounded-lg p-5 border-2 border-orange-300 mb-4">
+                            <p className="font-bold text-orange-900 mb-2">Before Explosion:</p>
+                            <p className="text-gray-700">Both objects at rest → Total momentum = 0</p>
+                            <p className="font-bold text-orange-900 mt-3 mb-2">After Explosion:</p>
+                            <p className="text-gray-700">Objects move apart → Total momentum must still = 0</p>
+                            <p className="text-gray-700 mt-2">This means: momentum of object 1 = -(momentum of object 2)</p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <div className="bg-blue-50 rounded-lg p-4">
+                                <p className="font-bold text-blue-900 mb-2">Example 1: Gun and Bullet</p>
+                                <p className="text-gray-700 text-sm">When a gun fires, the bullet goes forward with momentum. 
+                                The gun recoils backwards with equal but opposite momentum.</p>
+                            </div>
+                            <div className="bg-teal-50 rounded-lg p-4">
+                                <p className="font-bold text-teal-900 mb-2">Example 2: Rocket Launch</p>
+                                <p className="text-gray-700 text-sm">Exhaust gases shoot downwards. The rocket gains equal momentum 
+                                upwards, launching it into space!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Force and Momentum */}
+                    <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-6 border-2 border-red-200">
+                        <h3 className="text-2xl font-bold text-red-900 mb-4">Force, Momentum, and Impulse</h3>
+                        
+                        <div className="bg-red-900 text-white rounded-lg p-6 mb-4">
+                            <p className="text-2xl font-mono text-center mb-2">F = Δp ÷ t</p>
+                            <p className="text-center">Force = Change in momentum ÷ Time taken</p>
+                        </div>
+
+                        <p className="text-gray-700 mb-4">
+                            This equation tells us that the force experienced depends on how quickly momentum changes. 
+                            The same change in momentum over a longer time means a smaller force!
+                        </p>
+
+                        <div className="bg-white rounded-lg p-4 mb-4">
+                            <p className="font-bold text-gray-800 mb-2">Impulse</p>
+                            <p className="text-gray-700 mb-2">Rearranging the equation gives us:</p>
+                            <p className="text-xl font-mono text-center text-indigo-600 mb-2">F × t = Δp</p>
+                            <p className="text-gray-700">The quantity F × t is called <span className="font-bold">impulse</span> and 
+                            equals the change in momentum. Impulse is also measured in Ns (Newton-seconds).</p>
+                        </div>
+
+                        <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                            <p className="font-semibold text-gray-800 mb-2">Key Insight:</p>
+                            <p className="text-gray-700">For the same change in momentum, if you increase the time (t), 
+                            you decrease the force (F). This is the principle behind all safety features in vehicles!</p>
+                        </div>
+                    </div>
+
+                    {/* Safety Applications */}
+                    <div className="bg-white rounded-lg p-6 border-2 border-gray-200">
+                        <h3 className="text-2xl font-bold text-gray-800 mb-4">Real-World Safety Applications</h3>
+                        <p className="text-gray-700 mb-4">
+                            Understanding momentum helps engineers design safety features that save lives. The key is to 
+                            increase the time taken to stop, which reduces the force experienced.
+                        </p>
+
+                        <div className="space-y-4">
+                            <div className="bg-red-50 rounded-lg p-5 border-l-4 border-red-600">
+                                <h4 className="font-bold text-red-900 mb-2 flex items-center text-lg">
+                                    🚗 Crumple Zones
+                                </h4>
+                                <p className="text-gray-700 mb-2">
+                                    The front and rear of cars are designed to crumple in a crash.
+                                </p>
+                                <div className="bg-white rounded p-3 mt-2">
+                                    <p className="text-sm text-gray-700"><span className="font-semibold">How it works:</span> 
+                                    Crumpling takes time → Increases impact time → Reduces force on passengers</p>
+                                    <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Example:</span> 
+                                    Without crumple zones: 0.05s impact = huge force. With crumple zones: 0.2s impact = force reduced by 75%!</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-blue-50 rounded-lg p-5 border-l-4 border-blue-600">
+                                <h4 className="font-bold text-blue-900 mb-2 flex items-center text-lg">
+                                    🎈 Airbags
+                                </h4>
+                                <p className="text-gray-700 mb-2">
+                                    Airbags inflate rapidly in a crash to cushion the impact.
+                                </p>
+                                <div className="bg-white rounded p-3 mt-2">
+                                    <p className="text-sm text-gray-700"><span className="font-semibold">How it works:</span> 
+                                    Soft airbag increases stopping time compared to hitting the hard dashboard</p>
+                                    <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Bonus:</span> 
+                                    Also spreads the force over a larger area of your body</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-green-50 rounded-lg p-5 border-l-4 border-green-600">
+                                <h4 className="font-bold text-green-900 mb-2 flex items-center text-lg">
+                                    🔒 Seat Belts
+                                </h4>
+                                <p className="text-gray-700 mb-2">
+                                    Seat belts hold you in place and stretch slightly during a crash.
+                                </p>
+                                <div className="bg-white rounded p-3 mt-2">
+                                    <p className="text-sm text-gray-700"><span className="font-semibold">How it works:</span> 
+                                    The stretching increases stopping time, reducing the peak force on your body</p>
+                                    <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Also:</span> 
+                                    Prevents you from being thrown forward, maintaining the momentum change over a controlled time</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-purple-50 rounded-lg p-5 border-l-4 border-purple-600">
+                                <h4 className="font-bold text-purple-900 mb-2 flex items-center text-lg">
+                                    🏃 Other Examples
+                                </h4>
+                                <ul className="space-y-2 text-gray-700 text-sm">
+                                    <li>• <span className="font-semibold">Gym mats:</span> Increase time when you fall, reducing impact force</li>
+                                    <li>• <span className="font-semibold">Bike helmets:</span> Foam crumples to increase impact time</li>
+                                    <li>• <span className="font-semibold">Running shoes:</span> Cushioning spreads impact over longer time</li>
+                                    <li>• <span className="font-semibold">Parachutes:</span> Slow down descent, increasing time to reach ground = less force</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Common Exam Questions */}
+                    <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-6 border-2 border-indigo-200">
+                        <h3 className="text-2xl font-bold text-indigo-900 mb-4">Common GCSE Exam Questions</h3>
+                        
+                        <div className="space-y-4">
+                            <div className="bg-white rounded-lg p-4">
+                                <p className="font-bold text-gray-800 mb-2">Q: Why is momentum a vector quantity?</p>
+                                <p className="text-gray-700 text-sm">
+                                    <span className="font-semibold">A:</span> Because it has both magnitude (size) and direction. 
+                                    The direction is the same as the velocity direction.
+                                </p>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-4">
+                                <p className="font-bold text-gray-800 mb-2">Q: Explain how crumple zones reduce injuries in a crash.</p>
+                                <p className="text-gray-700 text-sm">
+                                    <span className="font-semibold">A:</span> Crumple zones increase the time taken for the car to stop 
+                                    during a collision. Using F = Δp ÷ t, if time (t) increases, the force (F) decreases, reducing injuries 
+                                    to passengers.
+                                </p>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-4">
+                                <p className="font-bold text-gray-800 mb-2">Q: State the principle of conservation of momentum.</p>
+                                <p className="text-gray-700 text-sm">
+                                    <span className="font-semibold">A:</span> In a closed system, the total momentum before an event 
+                                    equals the total momentum after the event (provided no external forces act).
+                                </p>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-4">
+                                <p className="font-bold text-gray-800 mb-2">Q: A gun has a mass of 3 kg. It fires a bullet of mass 0.01 kg 
+                                at 400 m/s. Why does the gun recoil?</p>
+                                <p className="text-gray-700 text-sm">
+                                    <span className="font-semibold">A:</span> Before firing, the total momentum is zero. After firing, 
+                                    the bullet has forward momentum. By conservation of momentum, the gun must gain equal momentum in the 
+                                    opposite direction (recoil) to keep total momentum at zero.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Key Points Summary */}
+                    <div className="bg-indigo-900 text-white rounded-lg p-6">
+                        <h3 className="text-2xl font-bold mb-4">Key Points to Remember</h3>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <p className="flex items-start">
+                                    <span className="mr-2">✓</span>
+                                    <span>Momentum = mass × velocity (p = m × v)</span>
+                                </p>
+                                <p className="flex items-start">
+                                    <span className="mr-2">✓</span>
+                                    <span>Measured in kg m/s</span>
+                                </p>
+                                <p className="flex items-start">
+                                    <span className="mr-2">✓</span>
+                                    <span>It's a vector (has direction)</span>
+                                </p>
+                                <p className="flex items-start">
+                                    <span className="mr-2">✓</span>
+                                    <span>Always conserved in closed systems</span>
+                                </p>
+                            </div>
+                            <div className="space-y-2">
+                                <p className="flex items-start">
+                                    <span className="mr-2">✓</span>
+                                    <span>Force = change in momentum ÷ time</span>
+                                </p>
+                                <p className="flex items-start">
+                                    <span className="mr-2">✓</span>
+                                    <span>F × t = impulse = change in momentum</span>
+                                </p>
+                                <p className="flex items-start">
+                                    <span className="mr-2">✓</span>
+                                    <span>Increasing impact time reduces force</span>
+                                </p>
+                                <p className="flex items-start">
+                                    <span className="mr-2">✓</span>
+                                    <span>Safety features work by increasing time</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function MomentumApp() {
+            const [activeTab, setActiveTab] = useState('learn');
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 md:p-8">
+                    <div className="max-w-6xl mx-auto">
+                        {/* Header */}
+                        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+                            <h1 className="text-3xl md:text-4xl font-bold text-indigo-900 mb-2">
+                                Momentum Calculator
+                            </h1>
+                            <p className="text-gray-600">
+                                Year 11 Physics Interactive Tool | Explore momentum, collisions, and conservation laws
+                            </p>
+                        </div>
+
+                        {/* Tab Navigation */}
+                        <div className="bg-white rounded-lg shadow-lg mb-6">
+                            <div className="flex flex-wrap border-b border-gray-200">
+                                <button
+                                    onClick={() => setActiveTab('learn')}
+                                    className={`px-6 py-3 font-semibold transition-colors ${
+                                        activeTab === 'learn'
+                                            ? 'text-indigo-600 border-b-2 border-indigo-600'
+                                            : 'text-gray-600 hover:text-indigo-600'
+                                    }`}
+                                >
+                                    Learn About Momentum
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('calculator')}
+                                    className={`px-6 py-3 font-semibold transition-colors ${
+                                        activeTab === 'calculator'
+                                            ? 'text-indigo-600 border-b-2 border-indigo-600'
+                                            : 'text-gray-600 hover:text-indigo-600'
+                                    }`}
+                                >
+                                    Basic Calculator
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('collision')}
+                                    className={`px-6 py-3 font-semibold transition-colors ${
+                                        activeTab === 'collision'
+                                            ? 'text-indigo-600 border-b-2 border-indigo-600'
+                                            : 'text-gray-600 hover:text-indigo-600'
+                                    }`}
+                                >
+                                    Collision Simulator
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('explosion')}
+                                    className={`px-6 py-3 font-semibold transition-colors ${
+                                        activeTab === 'explosion'
+                                            ? 'text-indigo-600 border-b-2 border-indigo-600'
+                                            : 'text-gray-600 hover:text-indigo-600'
+                                    }`}
+                                >
+                                    Explosion Calculator
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('force')}
+                                    className={`px-6 py-3 font-semibold transition-colors ${
+                                        activeTab === 'force'
+                                            ? 'text-indigo-600 border-b-2 border-indigo-600'
+                                            : 'text-gray-600 hover:text-indigo-600'
+                                    }`}
+                                >
+                                    Force & Impulse
+                                </button>
+                            </div>
+
+                            <div className="p-6">
+                                {activeTab === 'learn' && <LearnMomentum />}
+                                {activeTab === 'calculator' && <BasicCalculator />}
+                                {activeTab === 'collision' && <CollisionSimulator />}
+                                {activeTab === 'explosion' && <ExplosionCalculator />}
+                                {activeTab === 'force' && <ForceCalculator />}
+                            </div>
+                        </div>
+
+                        {/* Info Box */}
+                        <div className="bg-indigo-900 text-white rounded-lg shadow-lg p-6">
+                            <h3 className="text-xl font-bold mb-3">Key Formula</h3>
+                            <div className="bg-indigo-800 rounded p-4 mb-4">
+                                <p className="text-2xl font-mono text-center">p = m × v</p>
+                                <p className="text-center text-sm mt-2 text-indigo-200">
+                                    momentum = mass × velocity
+                                </p>
+                            </div>
+                            <div className="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p className="font-semibold mb-1">Units:</p>
+                                    <ul className="space-y-1 text-indigo-200">
+                                        <li>• Momentum: kg m/s</li>
+                                        <li>• Mass: kg</li>
+                                        <li>• Velocity: m/s</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p className="font-semibold mb-1">Remember:</p>
+                                    <ul className="space-y-1 text-indigo-200">
+                                        <li>• Momentum is a vector</li>
+                                        <li>• Direction matters!</li>
+                                        <li>• Always conserved in closed systems</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function BasicCalculator() {
+            const [mass, setMass] = useState('');
+            const [velocity, setVelocity] = useState('');
+            const [momentum, setMomentum] = useState(null);
+
+            const calculate = () => {
+                const m = parseFloat(mass);
+                const v = parseFloat(velocity);
+                if (!isNaN(m) && !isNaN(v)) {
+                    setMomentum(m * v);
+                }
+            };
+
+            return (
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">Calculate Momentum</h3>
+                        <p className="text-gray-600 mb-4">
+                            Enter the mass and velocity of an object to calculate its momentum.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Mass (kg)
+                            </label>
+                            <input
+                                type="number"
+                                value={mass}
+                                onChange={(e) => setMass(e.target.value)}
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                placeholder="e.g., 1200"
+                                step="0.01"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Velocity (m/s)
+                            </label>
+                            <input
+                                type="number"
+                                value={velocity}
+                                onChange={(e) => setVelocity(e.target.value)}
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                placeholder="e.g., 15"
+                                step="0.01"
+                            />
+                        </div>
+                    </div>
+
+                    <button
+                        onClick={calculate}
+                        className="w-full bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors"
+                    >
+                        Calculate Momentum
+                    </button>
+
+                    {momentum !== null && (
+                        <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6">
+                            <h4 className="text-lg font-bold text-gray-800 mb-2">Result:</h4>
+                            <p className="text-3xl font-bold text-green-700">
+                                {momentum.toFixed(2)} kg m/s
+                            </p>
+                            <div className="mt-4 text-sm text-gray-700">
+                                <p className="font-semibold mb-1">Working:</p>
+                                <p>p = m × v</p>
+                                <p>p = {mass} × {velocity}</p>
+                                <p>p = {momentum.toFixed(2)} kg m/s</p>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <p className="text-sm text-gray-700">
+                            <span className="font-semibold">Tip:</span> Remember that momentum is a vector quantity. 
+                            If the object is moving in the opposite direction, use a negative velocity value.
+                        </p>
+                    </div>
+                </div>
+            );
+        }
+
+        function CollisionSimulator() {
+            const [mass1, setMass1] = useState('');
+            const [velocity1, setVelocity1] = useState('');
+            const [mass2, setMass2] = useState('');
+            const [velocity2, setVelocity2] = useState('');
+            const [result, setResult] = useState(null);
+
+            const calculate = () => {
+                const m1 = parseFloat(mass1);
+                const v1 = parseFloat(velocity1);
+                const m2 = parseFloat(mass2);
+                const v2 = parseFloat(velocity2);
+
+                if (!isNaN(m1) && !isNaN(v1) && !isNaN(m2) && !isNaN(v2)) {
+                    const p1Before = m1 * v1;
+                    const p2Before = m2 * v2;
+                    const totalPBefore = p1Before + p2Before;
+                    const combinedMass = m1 + m2;
+                    const finalVelocity = totalPBefore / combinedMass;
+
+                    setResult({
+                        p1Before,
+                        p2Before,
+                        totalPBefore,
+                        combinedMass,
+                        finalVelocity
+                    });
+                }
+            };
+
+            return (
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">Collision Simulator</h3>
+                        <p className="text-gray-600 mb-4">
+                            Calculate what happens when two objects collide and stick together (perfectly inelastic collision).
+                        </p>
+                    </div>
+
+                    <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded mb-4">
+                        <p className="text-sm text-gray-700">
+                            <span className="font-semibold">Convention:</span> Use positive values for objects moving right/forward 
+                            and negative values for objects moving left/backward.
+                        </p>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="bg-indigo-50 p-4 rounded-lg">
+                            <h4 className="font-bold text-gray-800 mb-3">Object 1</h4>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Mass (kg)
+                                    </label>
+                                    <input
+                                        type="number"
+                                        value={mass1}
+                                        onChange={(e) => setMass1(e.target.value)}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                        placeholder="e.g., 2000"
+                                        step="0.01"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Velocity (m/s)
+                                    </label>
+                                    <input
+                                        type="number"
+                                        value={velocity1}
+                                        onChange={(e) => setVelocity1(e.target.value)}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                        placeholder="e.g., 10"
+                                        step="0.01"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-purple-50 p-4 rounded-lg">
+                            <h4 className="font-bold text-gray-800 mb-3">Object 2</h4>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Mass (kg)
+                                    </label>
+                                    <input
+                                        type="number"
+                                        value={mass2}
+                                        onChange={(e) => setMass2(e.target.value)}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                        placeholder="e.g., 800"
+                                        step="0.01"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Velocity (m/s)
+                                    </label>
+                                    <input
+                                        type="number"
+                                        value={velocity2}
+                                        onChange={(e) => setVelocity2(e.target.value)}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                        placeholder="e.g., 0"
+                                        step="0.01"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        onClick={calculate}
+                        className="w-full bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors"
+                    >
+                        Calculate Collision
+                    </button>
+
+                    {result && (
+                        <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6">
+                            <h4 className="text-lg font-bold text-gray-800 mb-4">Results:</h4>
+                            
+                            <div className="space-y-3 mb-4">
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Object 1 momentum before:</p>
+                                    <p className="text-xl font-bold text-indigo-600">
+                                        {result.p1Before.toFixed(2)} kg m/s
+                                    </p>
+                                </div>
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Object 2 momentum before:</p>
+                                    <p className="text-xl font-bold text-purple-600">
+                                        {result.p2Before.toFixed(2)} kg m/s
+                                    </p>
+                                </div>
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Total momentum before:</p>
+                                    <p className="text-xl font-bold text-gray-800">
+                                        {result.totalPBefore.toFixed(2)} kg m/s
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-green-100 p-4 rounded-lg">
+                                <p className="text-sm text-gray-600 mb-1">Final velocity (after collision):</p>
+                                <p className="text-3xl font-bold text-green-700">
+                                    {result.finalVelocity.toFixed(2)} m/s
+                                </p>
+                                <p className="text-xs text-gray-600 mt-2">
+                                    Combined mass: {result.combinedMass.toFixed(2)} kg
+                                </p>
+                            </div>
+
+                            <div className="mt-4 text-sm text-gray-700 bg-white p-3 rounded">
+                                <p className="font-semibold mb-1">Working:</p>
+                                <p>Total momentum before = {mass1} × {velocity1} + {mass2} × {velocity2}</p>
+                                <p>Total momentum before = {result.totalPBefore.toFixed(2)} kg m/s</p>
+                                <p className="mt-2">By conservation of momentum:</p>
+                                <p>Total momentum after = {result.totalPBefore.toFixed(2)} kg m/s</p>
+                                <p className="mt-2">Final velocity = Total momentum ÷ Combined mass</p>
+                                <p>Final velocity = {result.totalPBefore.toFixed(2)} ÷ {result.combinedMass.toFixed(2)}</p>
+                                <p>Final velocity = {result.finalVelocity.toFixed(2)} m/s</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        function ExplosionCalculator() {
+            const [totalMass, setTotalMass] = useState('');
+            const [mass1, setMass1] = useState('');
+            const [velocity1, setVelocity1] = useState('');
+            const [result, setResult] = useState(null);
+
+            const calculate = () => {
+                const mTotal = parseFloat(totalMass);
+                const m1 = parseFloat(mass1);
+                const v1 = parseFloat(velocity1);
+
+                if (!isNaN(mTotal) && !isNaN(m1) && !isNaN(v1)) {
+                    const m2 = mTotal - m1;
+                    const p1 = m1 * v1;
+                    const v2 = -p1 / m2;
+
+                    setResult({
+                        m2,
+                        p1,
+                        v2
+                    });
+                }
+            };
+
+            return (
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">Explosion Calculator</h3>
+                        <p className="text-gray-600 mb-4">
+                            Calculate recoil velocities when objects push apart (e.g., gun and bullet, rocket and exhaust).
+                        </p>
+                    </div>
+
+                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <p className="text-sm text-gray-700">
+                            <span className="font-semibold">Key Principle:</span> Before the explosion, total momentum = 0. 
+                            After, the objects have equal and opposite momentum.
+                        </p>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Total Mass Before Explosion (kg)
+                            </label>
+                            <input
+                                type="number"
+                                value={totalMass}
+                                onChange={(e) => setTotalMass(e.target.value)}
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                placeholder="e.g., 3.01"
+                                step="0.01"
+                            />
+                        </div>
+
+                        <div className="bg-indigo-50 p-4 rounded-lg">
+                            <h4 className="font-bold text-gray-800 mb-3">Object 1 (e.g., bullet)</h4>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Mass (kg)
+                                    </label>
+                                    <input
+                                        type="number"
+                                        value={mass1}
+                                        onChange={(e) => setMass1(e.target.value)}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                        placeholder="e.g., 0.01"
+                                        step="0.001"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                        Velocity (m/s)
+                                    </label>
+                                    <input
+                                        type="number"
+                                        value={velocity1}
+                                        onChange={(e) => setVelocity1(e.target.value)}
+                                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                        placeholder="e.g., 400"
+                                        step="0.01"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        onClick={calculate}
+                        className="w-full bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors"
+                    >
+                        Calculate Recoil
+                    </button>
+
+                    {result && (
+                        <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6">
+                            <h4 className="text-lg font-bold text-gray-800 mb-4">Results:</h4>
+                            
+                            <div className="space-y-3 mb-4">
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Object 2 mass:</p>
+                                    <p className="text-xl font-bold text-indigo-600">
+                                        {result.m2.toFixed(3)} kg
+                                    </p>
+                                </div>
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Object 1 momentum:</p>
+                                    <p className="text-xl font-bold text-gray-800">
+                                        {result.p1.toFixed(2)} kg m/s
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-green-100 p-4 rounded-lg">
+                                <p className="text-sm text-gray-600 mb-1">Object 2 recoil velocity:</p>
+                                <p className="text-3xl font-bold text-green-700">
+                                    {result.v2.toFixed(2)} m/s
+                                </p>
+                                <p className="text-xs text-gray-600 mt-2">
+                                    {result.v2 < 0 ? '(Negative = opposite direction)' : ''}
+                                </p>
+                            </div>
+
+                            <div className="mt-4 text-sm text-gray-700 bg-white p-3 rounded">
+                                <p className="font-semibold mb-1">Working:</p>
+                                <p>Object 2 mass = {totalMass} - {mass1} = {result.m2.toFixed(3)} kg</p>
+                                <p className="mt-2">Before explosion: Total momentum = 0</p>
+                                <p className="mt-2">After explosion:</p>
+                                <p>Object 1 momentum = {mass1} × {velocity1} = {result.p1.toFixed(2)} kg m/s</p>
+                                <p className="mt-2">By conservation: Object 2 momentum = -{result.p1.toFixed(2)} kg m/s</p>
+                                <p className="mt-2">Object 2 velocity = momentum ÷ mass</p>
+                                <p>Object 2 velocity = {(-result.p1).toFixed(2)} ÷ {result.m2.toFixed(3)}</p>
+                                <p>Object 2 velocity = {result.v2.toFixed(2)} m/s</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        function ForceCalculator() {
+            const [mass, setMass] = useState('');
+            const [initialVel, setInitialVel] = useState('');
+            const [finalVel, setFinalVel] = useState('');
+            const [time, setTime] = useState('');
+            const [result, setResult] = useState(null);
+
+            const calculate = () => {
+                const m = parseFloat(mass);
+                const u = parseFloat(initialVel);
+                const v = parseFloat(finalVel);
+                const t = parseFloat(time);
+
+                if (!isNaN(m) && !isNaN(u) && !isNaN(v) && !isNaN(t) && t !== 0) {
+                    const initialMomentum = m * u;
+                    const finalMomentum = m * v;
+                    const changeMomentum = finalMomentum - initialMomentum;
+                    const force = changeMomentum / t;
+                    const impulse = force * t;
+
+                    setResult({
+                        initialMomentum,
+                        finalMomentum,
+                        changeMomentum,
+                        force,
+                        impulse
+                    });
+                }
+            };
+
+            return (
+                <div className="space-y-6">
+                    <div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">Force & Impulse Calculator</h3>
+                        <p className="text-gray-600 mb-4">
+                            Calculate force from change in momentum using F = Δp ÷ t
+                        </p>
+                    </div>
+
+                    <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+                        <p className="text-sm text-gray-700">
+                            <span className="font-semibold">Formula:</span> Force = Change in momentum ÷ Time taken
+                        </p>
+                        <p className="text-sm text-gray-700 mt-1">
+                            <span className="font-semibold">Impulse:</span> F × t = Change in momentum
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Mass (kg)
+                            </label>
+                            <input
+                                type="number"
+                                value={mass}
+                                onChange={(e) => setMass(e.target.value)}
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                placeholder="e.g., 70"
+                                step="0.01"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Initial Velocity (m/s)
+                            </label>
+                            <input
+                                type="number"
+                                value={initialVel}
+                                onChange={(e) => setInitialVel(e.target.value)}
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                placeholder="e.g., 20"
+                                step="0.01"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Final Velocity (m/s)
+                            </label>
+                            <input
+                                type="number"
+                                value={finalVel}
+                                onChange={(e) => setFinalVel(e.target.value)}
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                placeholder="e.g., 0"
+                                step="0.01"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Time (s)
+                            </label>
+                            <input
+                                type="number"
+                                value={time}
+                                onChange={(e) => setTime(e.target.value)}
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                                placeholder="e.g., 2"
+                                step="0.01"
+                            />
+                        </div>
+                    </div>
+
+                    <button
+                        onClick={calculate}
+                        className="w-full bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors"
+                    >
+                        Calculate Force & Impulse
+                    </button>
+
+                    {result && (
+                        <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6">
+                            <h4 className="text-lg font-bold text-gray-800 mb-4">Results:</h4>
+                            
+                            <div className="grid md:grid-cols-2 gap-3 mb-4">
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Initial momentum:</p>
+                                    <p className="text-xl font-bold text-indigo-600">
+                                        {result.initialMomentum.toFixed(2)} kg m/s
+                                    </p>
+                                </div>
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Final momentum:</p>
+                                    <p className="text-xl font-bold text-purple-600">
+                                        {result.finalMomentum.toFixed(2)} kg m/s
+                                    </p>
+                                </div>
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Change in momentum:</p>
+                                    <p className="text-xl font-bold text-orange-600">
+                                        {result.changeMomentum.toFixed(2)} kg m/s
+                                    </p>
+                                </div>
+                                <div className="bg-white p-3 rounded">
+                                    <p className="text-sm text-gray-600">Impulse (F × t):</p>
+                                    <p className="text-xl font-bold text-blue-600">
+                                        {result.impulse.toFixed(2)} Ns
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-green-100 p-4 rounded-lg">
+                                <p className="text-sm text-gray-600 mb-1">Force applied:</p>
+                                <p className="text-3xl font-bold text-green-700">
+                                    {result.force.toFixed(2)} N
+                                </p>
+                                <p className="text-xs text-gray-600 mt-2">
+                                    {result.force < 0 ? '(Negative = force in opposite direction to motion)' : ''}
+                                </p>
+                            </div>
+
+                            <div className="mt-4 text-sm text-gray-700 bg-white p-3 rounded">
+                                <p className="font-semibold mb-1">Working:</p>
+                                <p>Initial momentum = m × u = {mass} × {initialVel} = {result.initialMomentum.toFixed(2)} kg m/s</p>
+                                <p>Final momentum = m × v = {mass} × {finalVel} = {result.finalMomentum.toFixed(2)} kg m/s</p>
+                                <p className="mt-2">Change in momentum = {result.finalMomentum.toFixed(2)} - {result.initialMomentum.toFixed(2)} = {result.changeMomentum.toFixed(2)} kg m/s</p>
+                                <p className="mt-2">Force = Change in momentum ÷ Time</p>
+                                <p>Force = {result.changeMomentum.toFixed(2)} ÷ {time}</p>
+                                <p>Force = {result.force.toFixed(2)} N</p>
+                            </div>
+
+                            <div className="mt-4 bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
+                                <p className="text-sm text-gray-700">
+                                    <span className="font-semibold">Safety Application:</span> Increasing impact time (larger t) 
+                                    reduces the force experienced. This is why crumple zones, airbags, and seat belts are effective 
+                                    safety features!
+                                </p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<MomentumApp />, document.getElementById('root'));
+    </script>
+</body>
+</html>
